@@ -11,11 +11,13 @@ class App extends Component {
   static get propTypes() {
     return {
       toggleTheme: PropTypes.func.isRequired,
+      onFetchContacts: PropTypes.func.isRequired,
     };
   }
 
   componentDidMount() {
-    this.props.onFetchContacts();
+    const { onFetchContacts } = this.props;
+    onFetchContacts();
   }
 
   render() {
@@ -38,7 +40,7 @@ class App extends Component {
                 />
                 <span className="slider round">
                   Change to {theme.changeTo} theme
-              </span>
+                </span>
               </label>
             </div>
             <h1>Phonebook</h1>
@@ -51,11 +53,10 @@ class App extends Component {
       </ThemeContext.Consumer>
     );
   }
-};
+}
 
 const mapDispatchToProps = {
   onFetchContacts: phonebookOperations.fetchContacts,
 };
 
 export default connect(null, mapDispatchToProps)(App);
-

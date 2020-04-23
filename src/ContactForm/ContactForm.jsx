@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import phonebookActions from '../redux/phonebook/phonebookActions.js';
 import phonebookOperations from '../redux/phonebook/phonebookOperations';
 import styles from './ContactForm.module.css';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import phonebookActions from '../redux/phonebook/phonebookActions';
 import phonebookOperations from '../redux/phonebook/phonebookOperations';
+import phonebookSelectors from '../redux/phonebook/phonebookSelectors';
 import PropTypes from 'prop-types';
 import styles from './ContactList.module.css';
 import ListItem from '../ListItem/ListItem';
@@ -21,18 +21,12 @@ ContactList.propTypes = {
     contacts: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => {
-    const { contacts, filter } = state;
-    const visibleContacts = contacts.filter(contact =>
-        contact.name.toLowerCase().includes(filter.toLowerCase()),
-    );
-    return {
-        contacts: visibleContacts
-    }
-};
+const mapStateToProps = (state) => ({
+    contacts: phonebookSelectors.getVisibleContacts(state),
+});
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    onRemove: () => dispatch(phonebookOperations.removeContact(ownProps.id)),
+const mapDispatchToProps = (dispatch) => ({
+    onRemove: (id) => dispatch(phonebookOperations.removeContact(id)),
 });
 
 

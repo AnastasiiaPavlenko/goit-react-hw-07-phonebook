@@ -1,15 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import phonebookActions from '../redux/phonebook/phonebookActions.js';
+import phonebookSelectors from '../redux/phonebook/phonebookSelectors';
 import styles from './Filter.module.css';
 import PropTypes from 'prop-types';
-import uuidv1 from 'uuid/v1';
 
 const Filter = ({ value, onChangeFilter }) => (
     <div className={styles.container}>
         <label htmlFor="filter">Find contacts by name</label>
         <input
-            id={uuidv1()}
             type="text"
             name="filter"
             value={value}
@@ -25,7 +24,7 @@ Filter.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    value: state.filter,
+    value: phonebookSelectors.getFilter(state),
 });
 
 const mapDispatchToProps = {
